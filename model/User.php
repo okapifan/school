@@ -4,6 +4,7 @@ require_once ('Model.php');
 require_once('UserEducation.php');
 require_once('UserCourseGrade.php');
 require_once('Education.php');
+require_once('Role.php');
 
 class User extends Model
 {
@@ -22,5 +23,9 @@ class User extends Model
 
     public function user_course_grades() {
         return $this->hasMany('UserCourseGrade', 'id', 'user_id');
+    }
+
+    public function role() {
+        return $this->belongsTo('Role', 'id', 'role_id');
     }
 }

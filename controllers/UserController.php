@@ -23,6 +23,37 @@ class UserController extends Controller {
     }
 
     /**
+     * method create
+     * Shows create page for a user
+     */
+    function create() {
+        $educations = Education::all();
+        $groups = [1,2,3,4,5,6,7,8];
+        $roles = Role::all();
+        $this->showTemplate('user.create', compact('educations', 'groups', 'roles'));
+    }
+
+    function store() {
+        $user = new User();
+        $data = $_POST;
+
+        $user->firstname = $data['firstname'];
+        $user->lastname = $data['lastname'];
+        $user->class = $data['class'];
+        $user->date_of_birth = $data['date_of_birth'];
+        $user->role_id = $data['role'];
+        $user->save();
+
+        $ue = new UserEducation();
+        $ue->user_id = $user->id;
+        $ue->education_id = $data['education'];
+        $ue->save();
+
+        StoreMessage(['success', 'Gebruiker met succes opgeslagen']);
+        return Redirect('/?page=user');
+    }
+
+    /**
      * method edit
      * Shows edit page for a user
      */

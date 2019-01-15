@@ -40,7 +40,8 @@ class Model
 
     public function save() {
         if (empty($this->id)) {
-            $this->saveNew();
+            $id = $this->saveNew();
+            $this->id = $id;
         } else {
             $id = $this->id;
             $this->saveExisting($id);
