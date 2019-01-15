@@ -100,4 +100,15 @@ class UserController extends Controller {
         StoreMessage(['success', 'Gebruiker met succes opgeslagen']);
         return Redirect('/?page=user');
     }
+
+    function destroy() {
+        if (!isset($_REQUEST['id']))
+            die('For the destroy function, the ID should exist');
+
+        $id = $_REQUEST['id'];
+        $user = User::find($id);
+        $user->delete();
+        StoreMessage(['success', 'Gebruiker met succes verwijderd']);
+        return Redirect('/?page=user');
+    }
 }

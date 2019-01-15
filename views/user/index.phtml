@@ -26,8 +26,9 @@ Hier kan je gebruikers zien en wijzigingen.
             <td><?= $user->class ?></td>
             <td><?= $user->date_of_birth ?></td>
             <td> <?= $user->education ?></td>
-            <td>
-                <a href="/?page=user&action=edit&id=<?= $user->id ?>" class="btn btn-outline-primary btn-sm"> Edit </a>
+            <td class="btn-group">
+                <a href="/?page=user&action=edit&id=<?= $user->id ?>" class="btn btn-outline-primary btn-sm"> Bewerk </a>
+                <a href="/?page=user&action=destroy&id=<?= $user->id ?>" class="btn btn-outline-danger btn-sm"> Wissen </a>
             </td>
         </tr>
         <?php } ?>

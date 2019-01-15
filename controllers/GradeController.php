@@ -46,6 +46,14 @@ class GradeController extends Controller {
         $this->showTemplate('grade.create', compact('class', 'course', 'students'));
     }
 
+    function edit() {
+        $usgID = $_GET['id'];
+        $usg = UserCourseGrade::find($usgID);
+
+        $this->showTemplate('grade.edit', compact('usg'));
+    }
+
+
     function store() {
         $data = $_POST;
 
@@ -60,6 +68,16 @@ class GradeController extends Controller {
         }
 
         StoreMessage(['success', 'Cijfers met succes opgeslagen']);
+
+        return Redirect('/?page=grade');
+    }
+
+    function delete() {
+        $id = $_GET['id'];
+        $usg = UserCourseGrade::find($id);
+        $usg->delete();
+
+        StoreMessage(['danger', 'Cijfer is gewist']);
 
         return Redirect('/?page=grade');
     }

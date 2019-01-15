@@ -171,6 +171,13 @@ class Model
         return get_called_class();
     }
 
+    public function delete() {
+        $qry = 'DELETE FROM '.$this->getTable().' WHERE id = '.$this->id;
+
+        return $this->getDB()->query($qry);
+    }
+
+
     public function hasOne($model, $primary_key, $foreign_key) {
         return $model::whereOne([[$foreign_key,'=', $this->$primary_key]]);
     }
