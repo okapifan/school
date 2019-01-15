@@ -1,0 +1,32 @@
+<!-- Load the header -->
+<?php require_once('../views/layouts/header.phtml'); ?>
+
+<!-- make sure there is no underline in an anchor element -->
+<style>
+    a:hover {
+        text-decoration: none;
+    }
+</style>
+
+<!-- Start of the page -->
+<h3>Kies een klas</h3>
+Van welke klas wil je de cijfers zien?
+
+<div class="col-6">
+    <section class="row row-eq-height">
+        <?php foreach ($classes AS $class) { ?>
+            <div class="col-6 product-row">
+                <a href="/?page=grade&action=showclass&id=<?= $class ?>">
+                    <div class="alert alert-info product-item pointer" style="text-align: center; cursor: pointer;">
+                        <strong style="font-size: 3em;">
+                            <?= $class ?>
+                        </strong>
+                    </div>
+                </a>
+            </div>
+        <?php } ?>
+    </section>
+</div>
+
+<!-- Load the footer -->
+<?php require_once('../views/layouts/footer.phtml'); ?>

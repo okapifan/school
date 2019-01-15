@@ -1,0 +1,54 @@
+<!-- Load the header -->
+<?php require_once('../views/layouts/header.phtml'); ?>
+
+<!-- Start of the page -->
+<h3>Bewerk een gebruiker</h3>
+
+<div class="col-6">
+    <form method="post" action="/?page=user&action=update&id=<?= $user->id ?>">
+        <div class="row">
+            <div class="form-group col-6">
+                <label for="firstname">Voornaam</label>
+                <input required type="text" name="firstname" value="<?= Old('firstname', $user->firstname)?>" class="form-control"/>
+            </div>
+            <div class="form-group col-6">
+                <label for="lastname">Achternaam</label>
+                <input required type="text" name="lastname" value="<?= $user->lastname?>" class="form-control"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-6">
+                <label for="class">Klas/groep</label>
+                <select required name="class" id="class" class="form-control">
+                    <?php foreach ($groups AS $group) { ?>
+                        <option value="<?= $group ?>" <?php if ($user->class == $group) { ?> selected <?php } ?>><?= $group ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="form-group col-6">
+                <label for="date_of_birth">Geboorte datum</label>
+                <input required type="date" name="date_of_birth" value="<?= $user->date_of_birth?>" class="form-control"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-6">
+                <label for="class">Klas/groep</label>
+                <select required name="education" id="education" class="form-control">
+                    <option disabled selected value=""> - Kies - </option>
+                    <?php foreach ($educations AS $education) { ?>
+                        <option
+                            <?php if ($userEducation == $education) { ?> selected <?php } ?> value="<?=$education->id?>"><?=$education->name?></option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-3">
+                <button class="form-control btn btn-sm btn-outline-primary">Opslaan</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Load the footer -->
+<?php require_once('../views/layouts/footer.phtml'); ?>

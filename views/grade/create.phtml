@@ -1,0 +1,45 @@
+<!-- Load the header -->
+<?php require_once('../views/layouts/header.phtml'); ?>
+
+<!-- Start of the page -->
+<h3>Cijfer invoeren voor klas <?= $class ?> voor het vak <?= $course->name ?></h3>
+
+<div class="col-6">
+    <form method="post" action="/?page=grade&action=store">
+        <input type="hidden" name="course_id" value="<?= $course->id ?>" />
+        <div class="form-group">
+            <label for="date">Datum v/d toets</label>
+            <input required type="date" name="date" class="form-control"/>
+        </div>
+        <section class="table-responsive">
+            <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Cijfer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($students AS $student) { ?>
+                    <tr>
+                        <td><?=$student->firstname?> <?= $student->lastname ?></td>
+                        <td>
+                            <select required name="student[<?= $student->id?>]" class="form-control">
+                                <?php for ($i = 10; $i >= 1; $i--) { ?>
+                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+        </section>
+        <div class="form-group col-3">
+            <button class="form-control btn btn-sm btn-outline-primary">Opslaan</button>
+        </div>
+    </form>
+</div>
+
+<!-- Load the footer -->
+<?php require_once('../views/layouts/footer.phtml'); ?>

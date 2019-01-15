@@ -1,0 +1,41 @@
+<!-- Load the header -->
+<?php require_once('../views/layouts/header.phtml'); ?>
+
+<!-- make sure there is no underline in an anchor element -->
+<style>
+    a:hover {
+        text-decoration: none;
+    }
+</style>
+
+<!-- Start of the page -->
+<h3>Overzicht van groep <?= $class ?></h3>
+
+<?php foreach ($students AS $student) { ?>
+    <h4><?= $student->firstname ?> <?= $student->lastname ?></h4>
+    <?php if (!empty($student->user_course_grades())) { ?>
+        <section class="table-responsive">
+        <table class="table table-bordered table-striped table-condensed">
+        <thead>
+        <tr>
+            <th>Vak</th>
+            <th>Datum</th>
+            <th>Cijfer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($student->user_course_grades() AS $ucg) { ?>
+            <tr>
+                <td><?= $ucg->course()->name ?></td>
+                <td><?= $ucg->grade_date ?></td>
+                <td><?= $ucg->grade ?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+        </table>
+    <?php } else {?>
+        <h6>Deze leerling heeft nog geen cijfers.</h6>
+    <?php } ?>
+<?php } ?>
+<!-- Load the footer -->
+<?php require_once('../views/layouts/footer.phtml'); ?>

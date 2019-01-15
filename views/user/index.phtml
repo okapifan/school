@@ -1,0 +1,37 @@
+<!-- Load the header -->
+<?php require_once('../views/layouts/header.phtml'); ?>
+
+<!-- Start of the page -->
+<h3>Gebruikers</h3>
+Hier kan je gebruikers zien en wijzigingen.
+
+<section class="table-responsive">
+ <table class="table table-bordered table-striped table-condensed">
+  <thead>
+  <tr>
+      <th>Voornaam</th>
+      <th>Achternaam</th>
+      <th>Groep</th>
+      <th>Geb. datum</th>
+      <th>Opleiding</th>
+      <th>Bewerken</th>
+  </tr>
+  </thead>
+     <tbody>
+        <?php foreach ($users AS $user) { ?>
+        <tr>
+            <td><?= $user->firstname ?></td>
+            <td><?= $user->lastname ?></td>
+            <td><?= $user->class ?></td>
+            <td><?= $user->date_of_birth ?></td>
+            <td> <?= $user->education ?></td>
+            <td>
+                <a href="/?page=user&action=edit&id=<?= $user->id ?>" class="btn btn-outline-primary btn-sm"> Edit </a>
+            </td>
+        </tr>
+        <?php } ?>
+     </tbody>
+ </table>
+
+    <!-- Load the footer -->
+<?php require_once('../views/layouts/footer.phtml'); ?>
