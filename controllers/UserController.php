@@ -102,13 +102,19 @@ class UserController extends Controller {
     }
 
     function destroy() {
-        if (!isset($_REQUEST['id']))
-            die('For the destroy function, the ID should exist');
-
         $id = $_REQUEST['id'];
         $user = User::find($id);
+
+        if (!empty($user->user_educations())) {
+            $user->user_educations()->delete();
+        }
+
+        foreach ($user->user_course_grades() AS $ucg){
+            $ucg->delete();
+        }
+
         $user->delete();
-        StoreMessage(['success', 'Gebruiker met succes verwijderd']);
+        StoreMessage(['danger', 'User is gewist']);
         return Redirect('/?page=user');
     }
 }

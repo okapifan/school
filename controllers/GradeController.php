@@ -72,6 +72,19 @@ class GradeController extends Controller {
         return Redirect('/?page=grade');
     }
 
+    function update(){
+        $data = $_POST;
+        $id = $data['usg_id'];
+        $usg = UserCourseGrade::find($id);
+
+        $usg->grade = $data['grade'];
+        $usg->save();
+
+        StoreMessage(['success', 'Cijfers met succes aangepast']);
+
+        return Redirect('/');
+    }
+
     function delete() {
         $id = $_GET['id'];
         $usg = UserCourseGrade::find($id);
@@ -79,6 +92,6 @@ class GradeController extends Controller {
 
         StoreMessage(['danger', 'Cijfer is gewist']);
 
-        return Redirect('/?page=grade');
+        return Redirect('/');
     }
 }
